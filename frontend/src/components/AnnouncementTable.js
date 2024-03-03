@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
-import { Table, Container, Button } from 'react-bootstrap';
-import { Link, useParams} from 'react-router-dom';
+import { Table, Container, Button, Modal } from 'react-bootstrap';
+import { Link } from 'react-router-dom';
 import * as FaIcons from 'react-icons/fa';
 
 
@@ -9,7 +9,11 @@ import * as FaIcons from 'react-icons/fa';
 
 const AnnouncementTable = () => {
     const [announcements, setAnnouncements] = useState([])
-    const { id } = useParams();
+    const [show, setShow] = useState(false);
+    const [message, setMessage] = useState(null);
+
+    const modalClose = () => setShow(false);
+    const modalShow = () => setShow(true);
 
 
     /*      GET ANNOUNCEMENTS    */
@@ -32,7 +36,6 @@ const AnnouncementTable = () => {
         getAnnouncements();
     }, []);
 
-/*      DELETE ANNOUNCEMENTS    */
         async function deleteAnnouncement(announcementId) {
             try {
                 await fetch(`http://localhost:8000/api/announce/delete/${announcementId}`, {
@@ -75,6 +78,20 @@ const AnnouncementTable = () => {
                 </tr>)}
                 </tbody>
             </Table>
+
+            <br />
+            <Button className="mt-5" onClick={modalShow}>Launch Modal</Button>
+            <Modal show={show} onHide={modalClose}>
+                <Modal.Header closeButton>
+                    <Modal.Title>Deleting Record Confirmation</Modal.Title>
+                </Modal.Header>
+                <Modal.Body>Are You Sure?</Modal.Body>
+                <Modal.Footer>
+                    <Button variant={"btn btn-outline-success"} onClick={modalClose}>Yes</Button>
+                    <Button variant={"btn btn-outline-danger"} onClick={modalClose}>Cancel</Button>
+                </Modal.Footer>
+            </Modal>
+
         </Container>
     )
 }
