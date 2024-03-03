@@ -33,27 +33,17 @@ const AnnouncementTable = () => {
     }, []);
 
 /*      DELETE ANNOUNCEMENTS    */
-    useEffect(() => {
-        async function deleteAnnouncement() {
-            const response = await fetch(`http://localhost:8000/api/announce/delete/${id}`, {
-                method: "DELETE",
-                headers: {
-                    "Content-Type": "application/json",
-                }
-            });
-            const _response = await response.json();
-
-            if (response.ok) {
-                console.log(_response.message);
-            } else {
-                console.log(_response.error);
+        async function deleteAnnouncement(announcementId) {
+            try {
+                await fetch(`http://localhost:8000/api/announce/delete/${announcementId}`, {
+                    method: "DELETE",
+                    })
+                setAnnouncements((announcements.filter(announcement => announcement._id !== announcementId)));
+            }
+            catch (error) {
+                console.error("Error deleting announcement:", error);
             }
         }
-        deleteAnnouncement();
-    }, []);
-
-
-
     return (
         <Container className="col8">
             <Table response hover>
@@ -79,7 +69,7 @@ const AnnouncementTable = () => {
 
                 {/*     FIX DELETE BUTTON       */}
                         <Button variant={"btn"} type="submit">
-                            <FaIcons.FaTrash style={{color: "#aaa"}} />
+                            <FaIcons.FaTrash onClick={() => deleteAnnouncement(announcement._id)}  style={{color: "#aaa"}} />
                         </Button>
                     </td>
                 </tr>)}
