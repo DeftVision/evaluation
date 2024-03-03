@@ -11,8 +11,10 @@ const priorityColors = {
 
 function DisplayAnnouncements() {
     const [announcements, setAnnouncements] = useState([]);
-    /*const [iconColor, setIconColor] = useState(null);*/
+    const [show, setShow] = useState(false);
 
+    const modalClose = () => setShow(false);
+    const modalShow = () => setShow(true);
 
     useEffect(() => {
         async function getAnnouncements() {
@@ -37,23 +39,6 @@ function DisplayAnnouncements() {
     }, []);
 
 
-    /*      {announcement.priority === "High" ? <IoIcons.IoIosMegaphone style={{color: "darkred"}}/> : <IoIcons.IoIosMegaphone style={{color: "darkorange"}}/>}
-    *
-    *       switch (priorityColor) {
-                case "High":
-                    return (<IoIcons.IoIosMegaphone style={{color: "darkred"}}/>);
-                case "Medium":
-                    return (<IoIcons.IoIosMegaphone style={{color: "darkorange"}}/>);
-                case "Low":
-                    return (<IoIcons.IoIosMegaphone style={{color: "#333"}}/>);
-                default:
-                    return (<IoIcons.IoIosMegaphone style={{color: "black"}}/>);
-            }
-    *
-    *
-    *
-    *  */
-
     const priorityColors = {
         "High": "darkred",
         "Medium": "darkorange",
@@ -62,21 +47,25 @@ function DisplayAnnouncements() {
 
 
     return(
-        <Container className="mt-4">
-            {announcements.map((announcements) =>
+        <Container className="mt-5">
+            <div>Announcement</div>
+            <hr className="mb-5" style={{width: "300px"}}/>
+            {announcements.filter(announcement => announcement.display === true).map((announcement) =>
                 <Card key={announcements._id} className="mt-5 shadow"
                       style={{display: "flex", flexDirection: "column"}}>
                     <Card.Body>
                         <Card.Title>
                             <Card.Subtitle>
-                                <IoIcons.IoIosMegaphone style={{color: priorityColors[announcements.priority]}} />
-                                {" "}Priority: {announcements.priority}
+                                <IoIcons.IoIosMegaphone style={{color: priorityColors[announcement.priority]}}/>
+                                {" "}Priority: {announcement.priority}
                             </Card.Subtitle><br/>
-                            <Card.Subtitle>Subject: {announcements.subject}</Card.Subtitle>
+                            <Card.Subtitle>Subject: {announcement.subject}</Card.Subtitle>
                         </Card.Title>
+
                         <Card.Text>
-                            <p className="text-truncate">{announcements.content}</p>
+                            <p className="text-truncate">{announcement.content}</p>
                         </Card.Text>
+
                     </Card.Body>
                 </Card>)}
         </Container>
