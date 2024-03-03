@@ -7,13 +7,7 @@ export default function Announcement() {
         <Container className="mt-5" style={{display: "flex", textAlign: "center"}}>
             <ListGroup  className="mb-5 me-4 list-group-flush" variant="" style={{width: "100px", top: "-25px"}}>
                 <ListGroup.Item>
-                    <Navbar.Text as={Link} to="/createannouncement" style={{textDecoration: "none"}}><h6>+new</h6></Navbar.Text>
-                </ListGroup.Item>
-                <ListGroup.Item>
-                    <Button variant={"btn"} style={{border: "none", textDecoration: "line-through"}}><h6>import</h6></Button>
-                </ListGroup.Item>
-                <ListGroup.Item>
-                    <Button variant={"btn"} style={{border: "none", textDecoration: "line-through"}}><h6>export</h6></Button>
+                    <Navbar.Text as={Link} to="/createannouncement" style={{textDecoration: "none"}}><h6>Create New</h6></Navbar.Text>
                 </ListGroup.Item>
             </ListGroup>
             <AnnouncementTable />
