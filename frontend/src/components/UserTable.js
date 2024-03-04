@@ -1,10 +1,18 @@
-import { useEffect, useState } from 'react';
-import { Container, Table, Button } from 'react-bootstrap';
-import { Link } from 'react-router-dom';
+import {useEffect, useState} from 'react';
+import {Container, Table, Button, Modal} from 'react-bootstrap';
+import {Link} from 'react-router-dom';
 import * as FaIcons from "react-icons/fa";
 
 const UserTable = () => {
     const [users, setUsers] = useState([]);
+    const [show, setShow] = useState(false);
+
+    const modalClose = () => {
+        setShow(false)
+    };
+    const modalShow = () => {
+        setShow(true);
+    }
 
 
     useEffect(() => {
@@ -28,45 +36,66 @@ const UserTable = () => {
             }
         }
         getUsers();
-    },[])
+    }, [])
 
     async function deleteUser(userId) {
+
         try {
             await fetch(`http://localhost:8000/api/delete/${userId}`, {
                 method: "DELETE"
+
             })
-            setUsers(users.filter(user => user._id !== userId));
-        }
-        catch (error) {
-            console.log("Error deleting user:", error);
+            modalClose();
+        } catch (error) {
+            console.log(error);
         }
 
     }
 
 
-    return(
-      <Container className="col-8">
-          <Table responsive hover striped={false} borderless={false}>
-              <thead>
-              <tr>
-                  <th>First</th>
-                  <th>Last</th>
-                  <th>Email</th>
-                  <th>Action</th>
-              </tr>
-              </thead>
-              <tbody>
+    return (
+        <Container>
+            <Table responsive hover striped={false} borderless={false}>
+                <thead>
+                <tr>
+                    <th>First</th>
+                    <th>Last</th>
+                    <th>Email</th>
+                    <th>Action</th>
+                </tr>
+                </thead>
+                <tbody>
                 {users.map((user) => <tr key={user._id}>
                     <td>{user.firstName}</td>
                     <td>{user.lastName}</td>
                     <td>{user.email}</td>
                     <td>
-                        {<Button as={Link} to={`/edituser/${user._id}`} variant={"btn"}><FaIcons.FaEdit style={{color: "dodgerblue"}} /></Button>}
-                        {<Button as={Link} onClick={() => deleteUser(user._id)}  variant={"btn"}><FaIcons.FaTrash style={{color: "dimgray"}} /></Button>}</td>
+                        {<Button as={Link}
+                                 to={`/edituser/${user._id}`}
+                                 variant={"btn"}>
+                            <FaIcons.FaEdit style={{color: "dodgerblue"}}/>
+                        </Button>}
+
+                        {<Button variant={"btn"} onClick={modalShow}>
+                            <FaIcons.FaTrash style={{color: "#aaa"}}/>
+                        </Button>}
+
+                        <Modal show={show} onHide={modalClose} size="sm">
+                            <Modal.Header closeButton>
+                                <Modal.Title>Delete Confirmation</Modal.Title>
+                            </Modal.Header>
+                            <Modal.Body>Are You Sure?</Modal.Body>
+                            <Modal.Footer>
+                                <Button variant={"btn btn-outline-success"}
+                                        onClick={() => deleteUser(user._id)}>Yes</Button>
+                                <Button variant={"btn btn-outline-danger"} onClick={modalClose}>Cancel</Button>
+                            </Modal.Footer>
+                        </Modal>
+                    </td>
                 </tr>)}
-              </tbody>
-          </Table>
-      </Container>
+                </tbody>
+            </Table>
+        </Container>
     );
 }
 

@@ -1,4 +1,4 @@
-import {Card, Container} from "react-bootstrap";
+import {Button, Card, Container, Modal} from "react-bootstrap";
 import { useEffect, useState } from 'react'
 import * as IoIcons from 'react-icons/io';
 
@@ -61,11 +61,9 @@ function DisplayAnnouncements() {
                             </Card.Subtitle><br/>
                             <Card.Subtitle>Subject: {announcement.subject}</Card.Subtitle>
                         </Card.Title>
-
-                        <Card.Text>
-                            <p className="text-truncate">{announcement.content}</p>
-                        </Card.Text>
-
+                            <Card.Text>
+                                <p className="text-truncate">{announcement.content}</p>
+                            </Card.Text>
                     </Card.Body>
                 </Card>)}
         </Container>

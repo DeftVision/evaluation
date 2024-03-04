@@ -36,7 +36,7 @@ const AnnouncementTable = () => {
         getAnnouncements();
     }, []);
 
-        async function deleteAnnouncement(announcementId) {
+        /*async function deleteAnnouncement(announcementId) {
             try {
                 await fetch(`http://localhost:8000/api/announce/delete/${announcementId}`, {
                     method: "DELETE",
@@ -46,10 +46,10 @@ const AnnouncementTable = () => {
             catch (error) {
                 console.error("Error deleting announcement:", error);
             }
-        }
+        }*/
     return (
-        <Container className="col8">
-            <Table response hover>
+        <Container>
+            <Table responsive hover>
                 <thead>
                 <tr>
                     <th></th>
@@ -70,10 +70,10 @@ const AnnouncementTable = () => {
                             <FaIcons.FaEdit style={{color: "dodgerblue"}} />
                         </Button>
 
-                {/*     FIX DELETE BUTTON       */}
+                        {/*DELETE BUTTON*/}
                         <Button variant={"btn"} type="submit">
-                            <FaIcons.FaTrash onClick={() => deleteAnnouncement(announcement._id)}  style={{color: "#aaa"}} />
-                        </Button>
+                            <FaIcons.FaTrash style={{color: "#aaa"}} />
+                        </Button>*
                     </td>
                 </tr>)}
                 </tbody>
@@ -83,7 +83,7 @@ const AnnouncementTable = () => {
             <Button className="mt-5" onClick={modalShow}>Launch Modal</Button>
             <Modal show={show} onHide={modalClose}>
                 <Modal.Header closeButton>
-                    <Modal.Title>Deleting Record Confirmation</Modal.Title>
+                    <Modal.Title>Delete Confirmation</Modal.Title>
                 </Modal.Header>
                 <Modal.Body>Are You Sure?</Modal.Body>
                 <Modal.Footer>

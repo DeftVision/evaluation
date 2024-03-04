@@ -33,7 +33,7 @@ h3.title-page, h1.title-page {
 }
 
 select.form-select option {
-  color: purple;
+
 }
 
 .toast-text {
@@ -60,6 +60,9 @@ select.form-select option {
   background: #515151;
   color: white;
 }
+
+
+
 
 
 
