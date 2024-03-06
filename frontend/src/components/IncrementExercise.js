@@ -1,16 +1,26 @@
-import {useState} from 'react';
+import {useEffect, useState} from 'react';
 
 import { Container, Button } from 'react-bootstrap';
 const IncrementExercise = () => {
-    const[newNumb, setNewNumb] = useState(0);
+    const[num, setNum] = useState(0);
+    const [click, setClick] = useState(false);
 
-    function increaseNum() {
-       setNewNumb(newNumb + 1);
-       console.log(newNumb);
+
+    useEffect(() => {
+        if(click) {
+            setNum(num + 1);
+            setClick(false);
+        }
+    }, [click]);
+
+    const handleClick = () => {
+        setClick(true);
+        console.log({num});
     }
+
     return (
         <Container className="mt-5">
-            <Button onClick={increaseNum} type="sumbit">New Number = {newNumb}</Button>
+            <Button  type="sumbit" variant={"btn btn-outline-secondary"} onClick={handleClick}>clicking increases by 1</Button> = {num}
         </Container>
     );
 };

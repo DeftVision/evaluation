@@ -43,6 +43,7 @@ const UserTable = () => {
 
     }
 
+
     return(
       <Container className="col-8">
           <Table responsive hover striped={false} borderless={false}>
