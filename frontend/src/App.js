@@ -15,7 +15,7 @@ import './App.css';
 function App() {
     const user_cookie = cookies.get("user_cookie");
     const [user, setUser] = useState(null);
-    const [loading, setLoading] = useState(true);
+    const [loading, setLoading] = useState(false);
 
     useEffect(() => {
         async function getUser() {
