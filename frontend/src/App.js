@@ -3,10 +3,10 @@ import { BrowserRouter as Router, Routes, Route, Navigate} from 'react-router-do
 import cookies from 'js-cookie';
 import 'bootstrap/dist/css/bootstrap.min.css'
 import { Container } from 'react-bootstrap';
-import { PrivateRoutes, Loading, File, PasswordReset, DisplayAnnouncements, IncrementExercise } from "./components/Index";
+import { PrivateRoutes, Support, Loading, File, PasswordReset, ForgotPassword, DisplayAnnouncements, IncrementExercise } from "./components/Index";
 import UserContext from './components/UserContext';
 import { Sidebar, Footer } from './pages/layout/Index';
-import { Home, Dashboard, Login, Register, ErrorPage, Evaluation, Admin, User, Announcement, CreateAnnouncement } from './pages/Index';
+import { Home, Dashboard, Login, Register, ErrorPage, Evaluation, Admin, LineCheck, User, AccountProfile, Announcement, CreateAnnouncement, PD, ActionForm } from './pages/Index';
 import './App.css';
 
 
@@ -15,7 +15,7 @@ import './App.css';
 function App() {
     const user_cookie = cookies.get("user_cookie");
     const [user, setUser] = useState(null);
-    const [loading, setLoading] = useState(true);
+    const [loading, setLoading] = useState(false);
 
     useEffect(() => {
         async function getUser() {
@@ -32,13 +32,13 @@ function App() {
             if(response.ok) {
                 setUser(_response.user);
             }
-            setLoading(false);
+            setLoading(true);
 
         }
             if(user_cookie) {
                 getUser();
             } else {
-                setLoading(true);
+                setLoading(false);
             }
     }, []);
 
@@ -71,13 +71,20 @@ function App() {
                                     <Route path="/evaluation" element={<Evaluation />} />
                                     <Route path="/file" element={<File />} />
                                     <Route path="/admin" element={<Admin/>} />
+                                    <Route path="/lineCheck" element={<LineCheck/>} />
+                                    <Route path="/profile" element={<AccountProfile />} />
+                                    <Route path="/development" element={<PD />} />
+                                    <Route path="/actionform" element={<ActionForm />} />
                                 </Route>
                                 <Route path="/login" element={user ? <Navigate to="/" /> : <Login />} />
                                 <Route path="/loading" element={<Loading />} />
+                                <Route path="/support" element={<Support />} />
                                 <Route path="/*" element={<ErrorPage />} />
+                                <Route path="/forgotpassword" element={<ForgotPassword />} />
                                 <Route path="/sidebar" element={<Sidebar />} />
                                 <Route path="/reset" element={<PasswordReset />} />
                                 <Route path="/exercise" element={<IncrementExercise />} />
+
 
                             </Routes>
                         </Container>

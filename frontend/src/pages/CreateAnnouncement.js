@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { Container, Form, Button } from 'react-bootstrap';
+import { Container, Form, Button, FormText } from 'react-bootstrap';
 import { useParams } from 'react-router-dom';
 import Loading from '../components/Loading';
 
@@ -95,7 +95,7 @@ export default function CreateAnnouncement({newAnnouncement}) {
                         controlid="name"
                         autocomplete="name"
                         value={form.name}
-                        placeholder='not displayed to users'
+                        placeholder=''
                         onChange={(e) => {
                             setForm({
                                 ...form,
@@ -103,6 +103,7 @@ export default function CreateAnnouncement({newAnnouncement}) {
                             });
                         }}
                     />
+                    <FormText>[ not displayed to users ]</FormText>
                 </Form.Group>
                 <Form.Group className="mb-4">
                     <Form.Label>Subject</Form.Label>

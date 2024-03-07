@@ -35,6 +35,7 @@ const Sidebar = () => {
                         <Nav.Link as={Link} to="/displayannouncements">Announcements</Nav.Link>
                         <Nav.Link as={Link} to="/dashboard">Dashboard</Nav.Link>
                         <Nav.Link as={Link} to="/evaluation">Evaluations</Nav.Link>
+                        <Nav.Link as={Link} to="/support">Support</Nav.Link>
                         {user && user.role === 'Admin' && (
                         <Nav.Link as={Link} to="/admin">Admin</Nav.Link>)}
                     </Nav>
@@ -46,7 +47,7 @@ const Sidebar = () => {
                             <NavDropdown.Item as={Link} to="*">Error</NavDropdown.Item>
                         </NavDropdown>
                         <hr style={{width: "200px", height: "15px"}}/>
-
+                        <Nav.Link as={Link} to="/profile">Profile</Nav.Link>
                         {/* Logout function * only visible when a user is logged in */}
                         {user && <Nav.Link as={Link} onClick={logout} className="logout-button">Logout</Nav.Link>}
                     </Nav>

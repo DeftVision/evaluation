@@ -21,19 +21,19 @@ const evaluationSchema = new schema({
     },
     greeting: {
         type: Boolean,
-        required: true,
+        required: false,
     },
     repeatOrder: {
         type: Boolean,
-        required: true,
+        required: false,
     },
     upsell: {
         type: Boolean,
-        required: true,
+        required: false,
     },
     patio: {
         type: Boolean,
-        required: true,
+        required: false,
     },
     wait: {
         type: Number,
