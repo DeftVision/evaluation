@@ -1,12 +1,12 @@
 import { Container } from 'react-bootstrap';
 
-import React from 'react';
+
 
 const ChangePassword = () => {
     return (
-        <div>
-            
-        </div>
+        <Container>
+            reset password
+        </Container>
     );
 };
 
