@@ -6,7 +6,7 @@ export default function Announcement() {
     return (
         <Container className="mt-5" style={{textAlign: "center"}}>
             <Button as={Link} to="/createannouncement" variant={"btn btn-outline-secondary"} className="mb-5" style={{textDecoration: "none"}}>
-                <h6>Create New</h6>
+                <div>Create New</div>
             </Button>
             <AnnouncementTable />
         </Container>

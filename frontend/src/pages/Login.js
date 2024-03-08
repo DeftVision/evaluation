@@ -3,11 +3,7 @@ import {
     Container,
     Form,
     FloatingLabel,
-    Button,
-    Toast,
-    ToastContainer,
-    CloseButton,
-    ToastBody
+    Button
 } from "react-bootstrap";
 import UserContext from "../components/UserContext";
 import cookies from "js-cookie";
@@ -50,12 +46,6 @@ export default function Login() {
         }
     };
 
-    const CloseButton = ({closeToast}) => (
-        <Button variant={"outline-light"} onClick={closeToast} style={{fontSize: '1rem'}}>
-
-        </Button>
-    );
-
     return (
         <Container style={{width: "60%"}}>
             <div className='page-title mb-4'>
@@ -96,12 +86,6 @@ export default function Login() {
                     login
                 </Button>
             </form>
-                    <Button variant={"btn"} as={Link} to="forgotpassword">forgot password</Button>
-            <ToastContainer position="middle-center" style={{zIndex: 1, width: "250px"}}>
-                <Toast onClose={() => setShow(false)} show={show} delay={3000} autohide style={{backgroundColor: "#262626", borderRight: "4px solid #0CBB52", borderLeft: "4px solid #0CBB52"}}>
-                    <ToastBody closeButton={<CloseButton closeToast={() => setShow(false)}/>} animate={true} className="me-auto toast-text">{message}</ToastBody>
-                </Toast>
-            </ToastContainer>
         </Container>
     );
 }

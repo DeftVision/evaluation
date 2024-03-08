@@ -35,7 +35,6 @@ const Sidebar = () => {
                         <Nav.Link as={Link} to="/displayannouncements">Announcements</Nav.Link>
                         <Nav.Link as={Link} to="/dashboard">Dashboard</Nav.Link>
                         <Nav.Link as={Link} to="/evaluation">Evaluations</Nav.Link>
-                        <Nav.Link as={Link} to="/support">Support</Nav.Link>
                         {user && user.role === 'Admin' && (
                         <Nav.Link as={Link} to="/admin">Admin</Nav.Link>)}
                     </Nav>

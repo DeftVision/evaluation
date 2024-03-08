@@ -9,6 +9,7 @@ import * as FaIcons from 'react-icons/fa';
 
 const AnnouncementTable = () => {
     const [announcements, setAnnouncements] = useState([])
+    const [announcementCount, setAnnouncementCount] = useState(0);
     const [show, setShow] = useState(false);
     const [message, setMessage] = useState(null);
 
@@ -34,19 +35,8 @@ const AnnouncementTable = () => {
             }
         }
         getAnnouncements();
-    }, []);
+    }, [announcementCount]);
 
-        /*async function deleteAnnouncement(announcementId) {
-            try {
-                await fetch(`http://localhost:8000/api/announce/delete/${announcementId}`, {
-                    method: "DELETE",
-                    })
-                setAnnouncements((announcements.filter(announcement => announcement._id !== announcementId)));
-            }
-            catch (error) {
-                console.error("Error deleting announcement:", error);
-            }
-        }*/
     return (
         <Container>
             <Table responsive hover>
@@ -71,21 +61,18 @@ const AnnouncementTable = () => {
                         </Button>
 
                         {/*DELETE BUTTON*/}
-                        <Button variant={"btn"} type="submit">
-                            <FaIcons.FaTrash style={{color: "#aaa"}} />
-                        </Button>*
+                        <Button variant={"btn"} type="submit" onClick={modalShow}>
+                            <FaIcons.FaTrash style={{color: "#aaa"}}  />
+                        </Button>
                     </td>
                 </tr>)}
                 </tbody>
             </Table>
 
             <br />
-            <Button className="mt-5" onClick={modalShow}>Launch Modal</Button>
-            <Modal show={show} onHide={modalClose}>
-                <Modal.Header closeButton>
-                    <Modal.Title>Delete Confirmation</Modal.Title>
-                </Modal.Header>
-                <Modal.Body>Are You Sure?</Modal.Body>
+
+            <Modal show={show} onHide={modalClose} size="sm">
+                <Modal.Body closeButton>Deleting record; are you Sure?</Modal.Body>
                 <Modal.Footer>
                     <Button variant={"btn btn-outline-success"} onClick={modalClose}>Yes</Button>
                     <Button variant={"btn btn-outline-danger"} onClick={modalClose}>Cancel</Button>

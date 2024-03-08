@@ -19,7 +19,7 @@ export default function Register({newUser}) {
     const [loading, setLoading] = useState(true);
     const { id } = useParams();
     const [show, setShow] = useState(false);
-    const [message, setMessage] = useState(null);
+
 
     useEffect(() => {
 
@@ -206,14 +206,6 @@ export default function Register({newUser}) {
                     </Button>
                 </form>
 
-
-
-            <ToastContainer position="middle-center" style={{zIndex: 100, width: "250px"}}>
-                <Toast onClose={() => setShow(false)} show={show} delay={3000} autohide style={{backgroundColor: "#262626", borderRight: "4px solid #0CBB52", borderLeft: "4px solid #0CBB52"}}>
-                    <ToastBody closeButton={<CloseButton closeToast={() => setShow(false)}/>} animate={true} className="me-auto toast-text">{message}</ToastBody>
-                </Toast>
-            </ToastContainer>
         </Container>
     )
-
 }

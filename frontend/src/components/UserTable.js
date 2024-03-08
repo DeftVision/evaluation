@@ -24,18 +24,19 @@ const UserTable = () => {
                     console.log(_response.error);
                 }
             } catch (error) {
-                console.error("Error fetching users:", error);
+                console.error(error);
             }
         }
         getUsers();
-    },[])
+    },[users])
 
     async function deleteUser(userId) {
         try {
             await fetch(`http://localhost:8000/api/delete/${userId}`, {
                 method: "DELETE"
             })
-            setUsers(users.filter(user => user._id !== userId));
+
+
         }
         catch (error) {
             console.log("Error deleting user:", error);

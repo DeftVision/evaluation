@@ -3,7 +3,7 @@ const fileModel = require("../models/fileModel");
 
 exports.getFiles = async (req, res) => {
     try {
-        const { category, fileType, uploadFile} = req.body;
+        const { category, uploadFile, description, display} = req.body;
         const files = await fileModel.find({});
         if(!files) {
             return res.send({
@@ -29,14 +29,14 @@ exports.getFiles = async (req, res) => {
 
 exports.uploadFile = async (req, res) => {
     try {
-        const { category, uploadFile, fileType } = req.body;
-        if(!category || !uploadFile || !fileType ) {
+        const { category, uploadFile, description, display } = req.body;
+        if(!category || !uploadFile || !description  ) {
             return res.send({
                 message: "All fields are required",
             })
         }
 
-        const file = new fileModel({category, uploadFile, fileType});
+        const file = new fileModel({category, uploadFile, description, display});
             await file.save();
         return res.send({
             message: "file was uploaded successfully.",

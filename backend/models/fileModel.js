@@ -14,6 +14,10 @@ const fileSchema = new schema({
     description: {
         type: String,
         required: false,
+    },
+    display: {
+        type: Boolean,
+        required: false,
     }
 },
     {timestamps: true})
