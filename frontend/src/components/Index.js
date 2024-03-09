@@ -5,5 +5,7 @@ export { default as PasswordReset } from './PasswordReset';
 export { default as DisplayAnnouncements } from './DisplayAnnouncements';
 export { default as DisplayEvaluation } from './DisplayEvaluation';
 export { default as IncrementExercise } from './IncrementExercise';
+export { default as CreateEvaluation } from '../components/CreateEvaluation';
+
 
 

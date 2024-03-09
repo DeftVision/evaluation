@@ -13,6 +13,9 @@ export default function Admin() {
                 <Link to="/file"><h6>Document & Forms</h6></Link>
             </ListGroup.Item>
             <ListGroup.Item>
+                <Link to="/evaluation"><h6>Evaluations</h6></Link>
+            </ListGroup.Item>
+            <ListGroup.Item>
                 <Link to="/development"><h6>Professional Development</h6></Link>
             </ListGroup.Item>
             <ListGroup.Item>

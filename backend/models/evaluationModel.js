@@ -70,5 +70,5 @@ const evaluationSchema = new schema({
 
 }, {timestamps: true});
 
-const evaluationModel = mongoose.model("Evaluation", evaluationSchema);
+const evaluationModel = mongoose.model("CreateEvaluation", evaluationSchema);
 module.exports = evaluationModel;

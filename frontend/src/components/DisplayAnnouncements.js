@@ -1,20 +1,30 @@
-import {Button, Card, Container, Modal} from "react-bootstrap";
+import { Container, ListGroup } from "react-bootstrap";
 import { useEffect, useState } from 'react'
 import * as IoIcons from 'react-icons/io';
 
-const priorityColors = {
-    "High": "darkred",
-    "Medium": "darkorange",
-    "Low": "#333"
-};
 
 
 function DisplayAnnouncements() {
     const [announcements, setAnnouncements] = useState([]);
-    const [show, setShow] = useState(false);
+    const [display, setDisplay] = useState([]);
+    const [show, setShow] = useState(true);
 
-    const modalClose = () => setShow(false);
-    const modalShow = () => setShow(true);
+
+    async function getAnnouncements() {
+        const response = await fetch('http://localhost:8000/api/announce/announcements', {
+            method: "GET",
+            headers: {
+                "Content-Type": "application/json",
+            }
+        })
+        const _response = await response.json();
+        if(response.ok && _response.announcements) {
+            setAnnouncements(_response.announcements);
+        } else {
+            console.log(_response.error);
+        }
+    }
+
 
     useEffect(() => {
         async function getAnnouncements() {
@@ -24,19 +34,15 @@ function DisplayAnnouncements() {
                     "Content-Type": "application/json",
                 }
             })
-
             const _response = await response.json();
             if(response.ok && _response.announcements) {
                 setAnnouncements(_response.announcements);
-                console.log(_response.announcements);
-
             } else {
                 console.log(_response.error);
             }
-
         }
         getAnnouncements();
-    }, []);
+    }, [announcements.display]);
 
 
     const priorityColors = {
@@ -50,7 +56,23 @@ function DisplayAnnouncements() {
         <Container className="mt-5">
             <div>Announcement</div>
             <hr className="mb-5" style={{width: "300px"}}/>
-            {announcements.filter(announcement => announcement.display === true).map((announcement) =>
+
+            {announcements.map((announcement) => <ListGroup key={announcement._id} variant={"flush"}>
+                {announcement.display &&
+                    <ListGroup.Item>
+                        <div style={{color: priorityColors[announcement.priority]}}><IoIcons.IoIosMegaphone />{" "}Priority: {announcement.priority}</div>
+                        <div>Subject: {announcement.subject}</div>
+                        <div className="text-truncate">{announcement.content}</div>
+                    </ListGroup.Item>}
+            </ListGroup>)}
+        </Container>
+    )
+}
+
+export default DisplayAnnouncements;
+
+/*
+*        {announcements.filter(announcement => announcement.display === true).map((announcement) =>
                 <Card key={announcements._id} className="mt-5 shadow"
                       style={{display: "flex", flexDirection: "column"}}>
                     <Card.Body>
@@ -66,8 +88,4 @@ function DisplayAnnouncements() {
                             </Card.Text>
                     </Card.Body>
                 </Card>)}
-        </Container>
-    )
-}
-
-export default DisplayAnnouncements;
+* */

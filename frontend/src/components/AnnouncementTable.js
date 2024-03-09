@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { Table, Container, Button, Modal } from 'react-bootstrap';
+import { Table, Container, Button } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import * as FaIcons from 'react-icons/fa';
 

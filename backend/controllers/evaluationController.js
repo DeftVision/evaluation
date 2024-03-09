@@ -69,6 +69,27 @@ exports.getEvaluation = async (req, res) => {
     }
 };
 
+exports.updateEvaluation = async (req, res) => {
+    try {
+        const {id} = req.params;
+        const {visitDateTime, evaluator, location, cashier, greeting, repeatOrder, upsell, patio, wait, foodScore, cleanScore, serviceScore, calculateScore, image, identifyManager, comments} = req.body;
+        const evaluation = await evaluationModel.findByIdAndUpdate(id, req.body, {new: true});
+        if(evaluation) {
+            return res.send({
+                message: "an evaluation was deleted successfully.",
+                evaluation,
+            })
+        }
+    } catch (error) {
+        console.log(error);
+        return res.send({
+            message: "deleting an evaluation callback error.",
+            error,
+        })
+    }
+}
+
+
 exports.deleteEvaluation = async (req, res) => {
     try {
         const {id} = req.params;

@@ -3,10 +3,10 @@ import { BrowserRouter as Router, Routes, Route, Navigate} from 'react-router-do
 import cookies from 'js-cookie';
 import 'bootstrap/dist/css/bootstrap.min.css'
 import { Container } from 'react-bootstrap';
-import { PrivateRoutes, Loading, File, PasswordReset, DisplayAnnouncements, IncrementExercise } from "./components/Index";
+import { PrivateRoutes, Loading, File, PasswordReset, CreateEvaluation, DisplayAnnouncements, IncrementExercise } from "./components/Index";
 import UserContext from './components/UserContext';
 import { Sidebar, Footer } from './pages/layout/Index';
-import { Home, Dashboard, Login, Register, ErrorPage, Evaluation, Admin, User, Announcement, CreateAnnouncement } from './pages/Index';
+import { Home, Dashboard, Evaluation, Login, Register, ErrorPage, Admin, User, Announcement, CreateAnnouncement } from './pages/Index';
 import './App.css';
 
 
@@ -68,6 +68,7 @@ function App() {
 
 
                                     <Route path="/dashboard" element={<Dashboard />} />
+                                    <Route path="/createevaluation" element={<CreateEvaluation />} />
                                     <Route path="/evaluation" element={<Evaluation />} />
                                     <Route path="/file" element={<File />} />
                                     <Route path="/admin" element={<Admin/>} />
