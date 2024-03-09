@@ -3,40 +3,41 @@ import { Table, Container, Button, Modal } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import * as FaIcons from 'react-icons/fa';
 
-
-
-
-
 const AnnouncementTable = () => {
     const [announcements, setAnnouncements] = useState([])
-    const [announcementCount, setAnnouncementCount] = useState(0);
-    const [show, setShow] = useState(false);
-    const [message, setMessage] = useState(null);
 
-    const modalClose = () => setShow(false);
-    const modalShow = () => setShow(true);
-
-
-    /*      GET ANNOUNCEMENTS    */
-    useEffect(() => {
-        async function getAnnouncements() {
-            const response = await fetch("http://localhost:8000/api/announce/announcements", {
-                method: "GET",
-                headers: {
-                    "Content-Type": "application/json",
-                }
-            });
-            const _response = await response.json();
-
-            if (response.ok && _response.announcements) {
-                setAnnouncements(_response.announcements);
-            } else {
-                console.log(_response.error);
+    async function getAnnouncements() {
+        const response = await fetch("http://localhost:8000/api/announce/announcements", {
+            method: "GET",
+            headers: {
+                "Content-Type": "application/json",
             }
-        }
-        getAnnouncements();
-    }, [announcementCount]);
+        });
+        const _response = await response.json();
 
+        if (response.ok && _response.announcements) {
+            setAnnouncements(_response.announcements);
+        } else {
+            console.log(_response.error);
+        }
+    }
+
+    useEffect(() => {
+        getAnnouncements();
+
+    }, []);
+
+    async function deleteAnnouncement(announcementId) {
+        try {
+            await fetch(`http://localhost:8000/api/announce/delete/${announcementId}`, {
+                method: "DELETE",
+            });
+            getAnnouncements()
+        }
+        catch (error) {
+            console.log(error);
+        }
+    }
     return (
         <Container>
             <Table responsive hover>
@@ -60,24 +61,13 @@ const AnnouncementTable = () => {
                             <FaIcons.FaEdit style={{color: "dodgerblue"}} />
                         </Button>
 
-                        {/*DELETE BUTTON*/}
-                        <Button variant={"btn"} type="submit" onClick={modalShow}>
+                        <Button variant={"btn"} type="submit" onClick={() => deleteAnnouncement(announcement._id)}>
                             <FaIcons.FaTrash style={{color: "#aaa"}}  />
                         </Button>
                     </td>
                 </tr>)}
                 </tbody>
             </Table>
-
-            <br />
-
-            <Modal show={show} onHide={modalClose} size="sm">
-                <Modal.Body closeButton>Deleting record; are you Sure?</Modal.Body>
-                <Modal.Footer>
-                    <Button variant={"btn btn-outline-success"} onClick={modalClose}>Yes</Button>
-                    <Button variant={"btn btn-outline-danger"} onClick={modalClose}>Cancel</Button>
-                </Modal.Footer>
-            </Modal>
 
         </Container>
     )

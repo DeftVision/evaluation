@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Container, Table, Button } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import * as FaIcons from "react-icons/fa";
@@ -6,8 +6,6 @@ import * as FaIcons from "react-icons/fa";
 const UserTable = () => {
     const [users, setUsers] = useState([]);
 
-
-    useEffect(() => {
         async function getUsers() {
             try {
                 const response = await fetch("http://localhost:8000/api/users", {
@@ -27,27 +25,25 @@ const UserTable = () => {
                 console.error(error);
             }
         }
+
+    useEffect(() => {
         getUsers();
-    },[users])
+    }, []);
 
     async function deleteUser(userId) {
         try {
             await fetch(`http://localhost:8000/api/delete/${userId}`, {
                 method: "DELETE"
-            })
-
-
+            });
+            getUsers();
         }
         catch (error) {
             console.log("Error deleting user:", error);
         }
-
     }
-
-
     return(
       <Container className="col-8">
-          <Table responsive hover striped={false} borderless={false}>
+          <Table responsive hover>
               <thead>
               <tr>
                   <th>First</th>
